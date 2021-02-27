@@ -11,7 +11,7 @@ import SignInAndSignUpPage from "./pages/sign-in-and-sign-up/sign-in-and-sign-up
 import Header from "./components/header/header.component";
 
 //ファイアベース
-import { auth } from "./firebase/firebase.utils";
+import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 
 //クラス型コンポーネントバージョン
 class App extends React.Component {
@@ -29,9 +29,21 @@ class App extends React.Component {
   //ライフサイクルメソード
   //useEffectの代わりに
   componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      this.setState({ currentUser: user });
-      console.log(user);
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      //ユーザーがログインしたかをチェック
+      if (userAuth) {
+        //データベースへ送ってみる
+        const userRef = await createUserProfileDocument(userAuth);
+        //アプリのステータスを更新
+        userRef.onSnapshot((snapShot) => {
+          this.setState({
+            id: snapShot.id,
+            ...snapShot.data(),
+          });
+        });
+      }
+      //ユーザーが存在しないなら、nullのままでセット
+      this.setState({ currentUser: userAuth });
     });
   }
   componentWillUnmount() {

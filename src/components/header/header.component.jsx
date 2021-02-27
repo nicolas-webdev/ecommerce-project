@@ -14,18 +14,18 @@ const Header = ({ currentUser }) => {
       </Link>
       <div className="options">
         <Link className="option" to="/shop">
-          SHOP
+          ショップ
         </Link>
         <Link className="option" to="/shop">
-          CONTACT
+          お問い合わせ
         </Link>
         {currentUser ? (
           <div className="option" onClick={() => auth.signOut()}>
-            SIGN OUT
+            ログアウト
           </div>
         ) : (
           <Link className="option" to="/signin">
-            SIGN IN
+            ログイン
           </Link>
         )}
       </div>
