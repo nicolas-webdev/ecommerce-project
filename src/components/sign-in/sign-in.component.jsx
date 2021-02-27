@@ -2,21 +2,28 @@ import React, { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
-import { signInWithGoogle } from "../../firebase/firebase.utils";
+import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
 
 import "./sign-in.styles.scss";
 
+//ファンクション型コンポーネント、フックでも可
 const SignIn = () => {
-  //State
+  //Stateフック
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
   //ハンドル
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormData({ email: "", password: "" });
+    const { email, password } = formData;
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      setFormData({ email: "", password: "" });
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleChange = (e) => {
     const { value, name } = e.target;
