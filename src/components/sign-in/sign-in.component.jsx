@@ -47,8 +47,12 @@ const SignIn = () => {
           handleChange={handleChange}
         />
 
-        <CustomButton type="submit">ログイン</CustomButton>
-        <CustomButton onClick={signInWithGoogle}>Googleでログイン</CustomButton>
+        <div className="buttons">
+          <CustomButton type="submit">ログイン</CustomButton>
+          <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+            Googleでログイン
+          </CustomButton>
+        </div>
       </form>
     </div>
   );
