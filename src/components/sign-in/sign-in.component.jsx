@@ -3,6 +3,7 @@ import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
 
 import { auth, signInWithGoogle } from "../../firebase/firebase.utils";
+import { useHistory } from "react-router-dom";
 
 import "./sign-in.styles.scss";
 
@@ -14,6 +15,9 @@ const SignIn = () => {
     password: "",
   });
 
+  //ヒストリーAPIフック
+  const history = useHistory();
+
   //ハンドル
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,6 +25,7 @@ const SignIn = () => {
     try {
       await auth.signInWithEmailAndPassword(email, password);
       setFormData({ email: "", password: "" });
+      history.push("/shop");
     } catch (error) {
       console.log(error);
     }
