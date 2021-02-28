@@ -60,10 +60,10 @@ const SignIn = () => {
         />
 
         <div className="buttons">
-          <CustomButton type="submit">ログイン</CustomButton>
           <CustomButton type="button" onClick={signInWithGoogle} isGoogleSignIn>
             Googleでログイン
           </CustomButton>
+          <CustomButton type="submit">ログイン</CustomButton>
         </div>
       </form>
     </div>
