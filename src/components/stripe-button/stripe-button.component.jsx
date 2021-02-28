@@ -15,11 +15,10 @@ const StripeCheckoutButton = ({ price }) => {
     <div style={{ textAlign: "center" }}>
       <p>カード番号 "4242-4242-4242-4242　01/23　123" で試してみて下さい</p>
       <StripeCheckout
-        label="支払う"
+        label="💳 支払う"
         name="Crwn Apparel"
         billingAddress
         shippingAddress
-        image="/crown.svg"
         description={`合計は¥${price}になります`}
         amount={price}
         panelLabel="支払う"
