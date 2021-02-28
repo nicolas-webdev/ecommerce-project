@@ -9,5 +9,6 @@ const middlewares = [logger];
 //ストアの状態をローカルストレージで保存
 export const store = createStore(rootReducer, applyMiddleware(...middlewares));
 export const persistor = persistStore(store);
+const Store = { store, persistor };
 
-export default { store, persistor };
+export default Store;

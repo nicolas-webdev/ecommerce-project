@@ -1,4 +1,4 @@
-export const sections = {
+export const directory = {
   sections: [
     {
       title: "帽子",
